@@ -1,0 +1,14 @@
+{
+  "name": "react-object-property-tree",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/telnet2/react-object-property-tree.git",
+  "author": "Joowhi <telnet2@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "create-react-app": "^1.5.2",
+    "material-icons": "^0.2.3",
+    "react-virtualized": "^9.20.1",
+    "react-virtualized-tree": "^2.1.0"
+  }
+}
