@@ -46,7 +46,7 @@ const objectsToNode = (objs, schema) => {
 
 const NodeRenderer = ({ node: { name, value, schema }, children }) => (
   <span>
-    {name}: {value}
+    {name}: <span>{value}</span>
     {children}
   </span>
 );
