@@ -13,7 +13,7 @@ const Expandable = ({
     iconsClassNameMap = {
         expanded: 'mi mi-keyboard-arrow-down',
         collapsed: 'mi mi-keyboard-arrow-right',
-        lastChild: '',
+        lastChild: 'mi mi-edit',
     },
 }) => {
     const { hasChildren, isExpanded } = getNodeRenderOptions(node);

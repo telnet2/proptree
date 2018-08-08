@@ -5,56 +5,56 @@ import { AutoSizer, List, CellMeasurerCache, CellMeasurer } from 'react-virtuali
 import { FlattenedNode } from './shapes/nodeShapes';
 
 export default class Tree extends React.Component {
-  _cache = new CellMeasurerCache({
-    fixedWidth: true,
-    minHeight: 20,
-  });
+    _cache = new CellMeasurerCache({
+        fixedWidth: true,
+        minHeight: 20,
+    });
 
-  rowRenderer = ({ node, key, measure, style, NodeRenderer }) => {
-    const { nodeMarginLeft } = this.props;
+    rowRenderer = ({ node, key, measure, style, NodeRenderer }) => {
+        const { nodeMarginLeft } = this.props;
 
-    return (
-      <div key={key} className="tree-node" style={{ ...style, paddingLeft: node.deepness * nodeMarginLeft }}>
-        <NodeRenderer node={node} onChange={this.props.onChange} measure={measure} />
-      </div>
-    );
-  };
+        return (
+            <div key={key} className="tree-node" style={{ ...style, paddingLeft: node.deepness * nodeMarginLeft }}>
+                <NodeRenderer node={node} onChange={this.props.onChange} measure={measure} />
+            </div>
+        );
+    };
 
-  measureRowRenderer = nodes => ({ key, index, style, parent }) => {
-    const { NodeRenderer } = this.props;
-    const node = nodes[index];
+    measureRowRenderer = nodes => ({ key, index, style, parent }) => {
+        const { NodeRenderer } = this.props;
+        const node = nodes[index];
 
-    return (
-      <CellMeasurer cache={this._cache} columnIndex={0} key={key} rowIndex={index} parent={parent}>
-        {measure => this.rowRenderer({ ...measure, node, key, style, NodeRenderer })}
-      </CellMeasurer>
-    );
-  };
+        return (
+            <CellMeasurer cache={this._cache} columnIndex={0} key={key} rowIndex={index} parent={parent}>
+                {measure => this.rowRenderer({ ...measure, node, key, style, NodeRenderer })}
+            </CellMeasurer>
+        );
+    };
 
-  render() {
-    const { nodes } = this.props;
+    render() {
+        const { nodes } = this.props;
 
-    return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <List
-            deferredMeasurementCache={this._cache}
-            ref={r => (this._list = r)}
-            height={height}
-            rowCount={nodes.length}
-            rowHeight={this._cache.rowHeight}
-            rowRenderer={this.measureRowRenderer(nodes)}
-            width={width}
-          />
-        )}
-      </AutoSizer>
-    );
-  }
+        return (
+            <AutoSizer>
+                {({ height, width }) => (
+                    <List
+                        deferredMeasurementCache={this._cache}
+                        ref={r => (this._list = r)}
+                        height={height}
+                        rowCount={nodes.length}
+                        rowHeight={this._cache.rowHeight}
+                        rowRenderer={this.measureRowRenderer(nodes)}
+                        width={width}
+                    />
+                )}
+            </AutoSizer>
+        );
+    }
 }
 
 Tree.propTypes = {
-  nodes: PropTypes.arrayOf(PropTypes.shape(FlattenedNode)).isRequired,
-  NodeRenderer: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  nodeMarginLeft: PropTypes.number,
+    nodes: PropTypes.arrayOf(PropTypes.shape(FlattenedNode)).isRequired,
+    NodeRenderer: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    nodeMarginLeft: PropTypes.number,
 };
